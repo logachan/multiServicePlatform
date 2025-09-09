@@ -48,9 +48,9 @@ export class UserService {
       }
     ]
 
-    for (let i of users) {
-      await this.mailQueue.add({ email: i.email });
-    }
+    // for (let i of users) {
+    //   await this.mailQueue.add({ email: i.email });
+    // }
 
     // here need to check if the user age is greater than 25 then filte and show
     const greater25AgeUser = await users.filter((i: any) => i?.age >= 25)

@@ -21,7 +21,6 @@ export class BulkEmailService {
     let emailDataArray = body?.emails
 
     for (let email of emailDataArray) {
-      console.log("boddddd", body?.content);
       
       await this.mailQueue.add({email:email, content: body?.content}) 
 
