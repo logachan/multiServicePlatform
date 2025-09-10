@@ -81,7 +81,7 @@ const Sendmail = () => {
             </Box>
 
             <Grid container columns={12} spacing={2} pt={2}>
-                <Grid size={6}>
+                <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
                     <Box sx={{ px: 5 }}>
                         <Box
                             sx={{
@@ -136,7 +136,7 @@ const Sendmail = () => {
                     </Box>
                 </Grid>
 
-                <Grid size={6}>
+                <Grid size={{ xs: 12, sm: 12, md: 6, lg: 6 }}>
                     <Box sx={{ px: 6, mt: 6 }}>
                         <ReactQuill
                             ref={quillRef}

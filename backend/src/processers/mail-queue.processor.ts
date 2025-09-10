@@ -11,8 +11,8 @@ export class MailQueueProcessor {
     async handleSendMail(job: Job<{email:string, content: string}>){
         const {email, content}  = job.data
 
-        console.log("email:" , email);
-        console.log("content : ", content);
+        // console.log("email:" , email);
+        // console.log("content : ", content);
         
         
         await this.mailService.sendBulkEmail(email, content)
