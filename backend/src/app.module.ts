@@ -10,8 +10,9 @@ import { BulkEmailModule } from './api/bulk-email/bulk-email.module';
   imports: [UserModule,BulkEmailModule, MailQueueModule,
     BullModule.forRoot({
       redis: {
-        host: 'localhost', // or your Redis server
-        port: 6379,
+        host: process?.env?.REDIS_HOST, // or your Redis server
+        // port: Number(process?.env?.REDIS_PORT),
+        port:6379,
       },
     }),
   ],
