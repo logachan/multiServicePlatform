@@ -1,197 +1,72 @@
 import { Box, Typography } from "@mui/material";
 import React, { useState, useRef, useEffect } from "react";
-import CustomButtonTrigger from "../components/CustomButton";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const Home = ({ limitTags = 3 }) => {
-  const [selectedValues, setSelectedValues] = useState([]);
-  const [inputValue, setInputValue] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
 
-  const inputRef = useRef(null);
-  const dropdownRef = useRef(null);
 
-  const options = [
-    { value: 1, name: "Apple" },
-    { value: 2, name: "Banana" },
-    { value: 3, name: "Cherry" },
-    { value: 4, name: "Date" },
-    { value: 5, name: "Elderberry" },
+
+  function createData(name, calories, fat, carbs, protein) {
+    return { name, calories, fat, carbs, protein };
+  }
+
+  // Pass the Custom function to get the JSON
+  const rows = [
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
   ];
-
-  const filteredOptions = options.filter(
-    (opt) =>
-      opt.name.toLowerCase().includes(inputValue.toLowerCase()) &&
-      !selectedValues.some((sel) => sel.value === opt.value)
-  );
-
-  const handleSelect = (option) => {
-    setSelectedValues((prev) => [...prev, option]);
-    setInputValue("");
-    setIsOpen(false);
-  };
-
-  const handleClickOutside = (e) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(e.target) &&
-      inputRef.current &&
-      !inputRef.current.contains(e.target)
-    ) {
-      setIsOpen(false);
-    }
-  };
-
-  const clearInput = () => {
-    setInputValue("");
-    setIsOpen(true);
-    inputRef.current?.focus();
-  };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
 
 
 
   return (
     <>
-      <Box sx={{ backgroundColor: "grey" }}>
-        <Box sx={{ py: 1, textAlign: "center", }}>
-
+      <Box>
+        <Box sx={{ py: 1, textAlign: "center", border: "3px solid black", bgcolor: "black", color: "#fff" }}>
           <marquee behavior="scroll" direction="right"><Typography variant="h2">Welcome To The Home Page</Typography></marquee>
         </Box>
 
-        <Typography variant="h4" textAlign={"center"} sx={{ mt: 4 }}>
-          MultiSelect
-        </Typography>
-
-        <div
-          className="multi-select"
-          style={{
-            width: "300px",
-            margin: "20px auto",
-            position: "relative",
-          }}
-        >
-          <div
-            className="tags"
-            style={{
-              border: "1px solid #ccc",
-              padding: "5px",
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "5px",
-              alignItems: "center",
-            }}
-          >
-            {selectedValues.slice(0, limitTags).map((opt) => (
-              <span
-                key={opt.value}
-                style={{
-                  background: "#eee",
-                  padding: "3px 7px",
-                  borderRadius: "4px",
-                }}
-              >
-                {opt.name}
-              </span>
-            ))}
-            {selectedValues.length > limitTags && (
-              <span
-                style={{
-                  background: "#eee",
-                  padding: "3px 7px",
-                  borderRadius: "4px",
-                }}
-              >
-                +{selectedValues.length - limitTags}
-              </span>
-            )}
-
-            {/* Input + clear icon */}
-            <div
-              style={{
-                flex: 1,
-                display: "flex",
-                alignItems: "center",
-                minWidth: "60px",
-              }}
-            >
-              <input
-                ref={inputRef}
-                type="text"
-                value={inputValue}
-                placeholder="Select options..."
-                style={{
-                  flex: 1,
-                  border: "none",
-                  outline: "none",
-                  minWidth: "40px",
-                }}
-                onFocus={() => setIsOpen(true)}
-                onChange={(e) => setInputValue(e.target.value)}
-              />
-              {inputValue.length > 0 && (
-                <span
-                  style={{
-                    cursor: "pointer",
-                    color: "#888",
-                    padding: "0 5px",
-                    fontWeight: "bold",
-                    fontSize: "16px",
-                    userSelect: "none",
-                  }}
-                  onClick={clearInput}
-                >
-                  ✕
-                </span>
-              )}
-            </div>
-          </div>
-
-          {isOpen && filteredOptions.length > 0 && (
-            <div
-              ref={dropdownRef}
-              style={{
-                position: "absolute",
-                background: "#fff",
-                border: "1px solid #ccc",
-                width: "100%",
-                maxHeight: "150px",
-                overflowY: "auto",
-                zIndex: 100,
-              }}
-            >
-              {filteredOptions.map((option) => (
-                <div
-                  key={option.value}
-                  style={{
-                    padding: "5px",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                  onClick={() => handleSelect(option)}
-                >
-                  <input
-                    type="checkbox"
-                    readOnly
-                    checked={false}
-                    style={{ marginRight: "5px" }}
-                  />
-                  {option.name}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        <Box sx={{ textAlign: "center" }}>
-          <>
-            <CustomButtonTrigger />
-          </>
-        </Box>
+        <>
+          <Box sx={{px:3, pt:4}}>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Dessert (100g serving)</TableCell>
+                    <TableCell align="right">Calories</TableCell>
+                    <TableCell align="right">Fat&nbsp;(g)</TableCell>
+                    <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+                    <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                    <TableRow
+                      key={row.name}
+                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="right">{row.calories}</TableCell>
+                      <TableCell align="right">{row.fat}</TableCell>
+                      <TableCell align="right">{row.carbs}</TableCell>
+                      <TableCell align="right">{row.protein}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
+        </>
       </Box>
     </>
   );

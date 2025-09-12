@@ -2,13 +2,16 @@ import React from 'react'
 import { RouterProvider } from 'react-router-dom'
 import routerPath from './routes'
 import { ToastContainer } from 'react-toastify'
+import ChatBox from './components/ChatBox'
 
 const App = () => {
   return (
     <>
       <div>
-        <ToastContainer/>
-        <RouterProvider router={routerPath}/>
+        <ChatBox />
+        <ToastContainer />
+
+        <RouterProvider router={routerPath} />
       </div>
     </>
   )

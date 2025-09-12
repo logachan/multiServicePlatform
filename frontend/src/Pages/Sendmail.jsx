@@ -16,6 +16,7 @@ const Sendmail = () => {
     const [emails, setEmails] = useState(["logachan08@gmail.com", "logachan08@gmail.com"])
     const [errors, setErrors] = useState(['', ''])
 
+    
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const modules = {
