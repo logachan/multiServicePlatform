@@ -5,9 +5,11 @@ import { UserModule } from './api/user/user.module';
 import { MailQueueModule } from './mail-queue/mail-queue.module';
 import { BullModule } from '@nestjs/bull';
 import { BulkEmailModule } from './api/bulk-email/bulk-email.module';
+import { ChatGateway } from './chat/chat.gateway';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
-  imports: [UserModule,BulkEmailModule, MailQueueModule,
+  imports: [UserModule,BulkEmailModule, MailQueueModule,ChatModule,
     BullModule.forRoot({
       redis: {
         host: process?.env?.REDIS_HOST, // or your Redis server
